@@ -20,11 +20,51 @@ class Databases{
       print(e);
     }
   }
-  void create_request(String from,String to,String uid)async{
+  void create_request(String from,String to,String uid,String pending,String driver_uid)async{
     try{
-      await firestore.collection("requests").doc(uid).set({'from':from,'to':to,'pending':0,'driver_uid':""});
+      await firestore.collection("requests").doc(uid).set({'from':from,'to':to,'pending':pending,'driver_uid':driver_uid});
     }catch(e){
       print(e);
     }
+  }
+  Future read() async{
+    QuerySnapshot querySnapshot;
+    List docs=[];
+    try{
+      querySnapshot= await firestore.collection('requests').get();
+      if(querySnapshot.docs.isNotEmpty){
+        for(var doc in querySnapshot.docs.toList()){
+          Map a ={"id" : doc.id, "from" : doc['from'], "to" : doc['to'],"pending":doc['pending'],"driver_uid":doc['driver_uid']};
+          docs.add(a);
+        }
+        return docs;
+
+      }
+    } catch(e){
+      print(e);
+      return docs;
+    }
+
+  }
+  void delete(String id) async{
+    try{
+      await firestore.collection("requests").doc(id).delete();
+    }catch(e){
+      print(e);
+    }
+  }
+  Future check_request(String uid) async{
+    late Map? a;
+    try{
+      var snapshot=await firestore.collection("requests").doc(uid).get();
+      a=snapshot.data();
+      // print(a!['name']);
+      return a;
+
+    } catch(e){
+      print(e);
+    }
+
+
   }
 }
