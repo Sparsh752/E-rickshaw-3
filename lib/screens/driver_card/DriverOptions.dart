@@ -1,8 +1,11 @@
 import 'package:erickshaw/screens/driver_card/card_model.dart';
 import 'package:erickshaw/screens/landingpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../database.dart';
 
 class DriverOptions extends StatefulWidget {
   const DriverOptions({Key? key}) : super(key: key);
@@ -13,7 +16,25 @@ class DriverOptions extends StatefulWidget {
 
 class _DriverOptionsState extends State<DriverOptions> {
   final auth = FirebaseAuth.instance;
-
+  var storage=FirebaseStorage.instance;
+  late Databases db;
+  List docs=[];
+  initialise(){
+    db=Databases();
+    db.initialise();
+    db.read().then((value) => {
+      setState((){
+        docs=value;
+      })
+    });
+  }
+  late String _uid;
+  @override
+  void initState(){
+    super.initState();
+    initialise();
+    _uid=auth.currentUser?.uid.toString()??"";
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +58,51 @@ class _DriverOptionsState extends State<DriverOptions> {
         ],
       ),
       body: ListView.builder(
+        itemCount: docs.length,
         itemBuilder: (BuildContext Context, int index){
-          return CardModel();
+          return Card(
+            elevation: 10,
+            child: Container(
+              width: MediaQuery.of(context).size.width*0.9,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(docs[index]['from']),
+                    Icon(Icons.arrow_forward_outlined),
+                    Text(docs[index]['to']),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      width: 60,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: (){
+                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
+                          print(docs[index]);
+                          db.create_request(docs[index]['from'],docs[index]['to'], docs[index]['id'],'1',_uid);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(238, 107, 97, 1.0)),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13.0),
+                                  side: BorderSide(color: Colors.red)
+                              )
+                          ),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         },
       ),
     );
