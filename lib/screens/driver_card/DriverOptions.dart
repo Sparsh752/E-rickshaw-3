@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:erickshaw/screens/driver_card/card_model.dart';
 import 'package:erickshaw/screens/landingpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +23,7 @@ class _DriverOptionsState extends State<DriverOptions> {
   late Databases db;
   String passuid="", passfrom="", passto="";
   List docs=[];
+
   initialise(){
     db=Databases();
     db.initialise();
@@ -30,11 +33,15 @@ class _DriverOptionsState extends State<DriverOptions> {
       })
     });
   }
+  late Timer timer;
   late String _uid;
   @override
   void initState(){
     super.initState();
-    initialise();
+    timer=Timer.periodic(Duration(seconds: 1), (timer) {
+      initialise();
+    });
+    // initialise();
     _uid=auth.currentUser?.uid.toString()??"";
   }
   @override

@@ -106,52 +106,50 @@ class _driver_detailsState extends State<driver_details> {
               ),
             ),
             SizedBox(height: 30,),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      'from',
-                      style: TextStyle(
-                        letterSpacing: 1.5,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    // SizedBox(height: 10,),
-                    Text(
-                      '${widget.pfrom}',
-                      style: TextStyle(
-                        color: Color.fromRGBO(238, 107, 97, 1.0),
-                        letterSpacing: 2.0,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                Text(
+                  'from',
+                  style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(width: 50,),
-                Column(
-                  children: [
-                    Text(
-                      'to',
-                      style: TextStyle(
-                        letterSpacing: 1.5,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    // SizedBox(height: 10,),
-                    Text(
-                      '${widget.to}',
-                      style: TextStyle(
-                        color: Color.fromRGBO(238, 107, 97, 1.0),
-                        letterSpacing: 2.0,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                // SizedBox(height: 10,),
+                Text(
+                  '${widget.pfrom}',
+                  style: TextStyle(
+                    color: Color.fromRGBO(238, 107, 97, 1.0),
+                    letterSpacing: 2.0,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 30,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'to',
+                  style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // SizedBox(height: 10,),
+                Text(
+                  '${widget.to}',
+                  style: TextStyle(
+                    color: Color.fromRGBO(238, 107, 97, 1.0),
+                    letterSpacing: 2.0,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

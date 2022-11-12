@@ -33,6 +33,22 @@ class _SelectRouteState extends State<SelectRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(239, 242, 221, 1),
+      appBar: AppBar(
+        leadingWidth: 0,
+        title: Text('Select Route'),
+        actions: [
+          IconButton(
+              onPressed: (){
+                auth.signOut();
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Landing()
+                    )
+                );
+              },
+              icon: Icon(Icons.logout)
+          )
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
