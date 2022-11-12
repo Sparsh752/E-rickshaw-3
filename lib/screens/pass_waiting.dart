@@ -33,7 +33,7 @@ class _PassWaitState extends State<PassWait> {
     super.initState();
     initialise();
     _uid=auth.currentUser?.uid.toString()??"";
-    timer=Timer.periodic(Duration(seconds: 3), (timer) {
+    timer=Timer.periodic(Duration(seconds: 1), (timer) {
       CheckAccepted();
     });
   }
@@ -62,6 +62,7 @@ class _PassWaitState extends State<PassWait> {
             ),
             ElevatedButton(
                 onPressed:(){
+                  db.delete(_uid);
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SelectRoute()));
                 },
                 child: Text('Cancel Ride'),

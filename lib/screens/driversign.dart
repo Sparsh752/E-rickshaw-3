@@ -49,64 +49,9 @@ class _DriverSignState extends State<DriverSign> {
             padding: const EdgeInsets.all(8.0),
             child: ListView(
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: Color.fromRGBO(238, 107, 97, 1.0),
-                      ),
-                      iconSize: 50.0,
-                    )
-                  ],
-                ),
+
                 Container(
-                  height: 60,
-                ),
-                // SizedBox(
-                //   width: 110,
-                //   height: 110,
-                //   child: RawMaterialButton(
-                //     onPressed: () {},
-                //     // elevation: 2.0,
-                //     fillColor: Colors.white,
-                //     child: Image.asset('assets/images/def_prof.png'),
-                //     // padding: EdgeInsets.all(15.0),
-                //     shape: CircleBorder(),
-                //   ),
-                // ),
-                Container(
-                  height: 110,
-                  width: 110,
-                  // color: Color.fromRGBO(239, 242, 221, 1),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    fit: StackFit.expand,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/def_prof.png'),
-                        // backgroundColor: Color.fromRGBO(239, 242, 221, 1),
-                      ),
-                      Positioned(
-                          bottom: 0,
-                          right: 110,
-                          child: RawMaterialButton(
-                            onPressed: () {},
-                            elevation: 2.0,
-                            fillColor: Color.fromRGBO(239, 242, 221, 1),
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Color.fromRGBO(238, 107, 97, 1.0),
-                            ),
-                            // padding: EdgeInsets.all(15.0),
-                            shape: CircleBorder(),
-                          )),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 20,
+                  height: 100,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.0),
