@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../database.dart';
+import '../passinfo.dart';
 
 class DriverOptions extends StatefulWidget {
   const DriverOptions({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _DriverOptionsState extends State<DriverOptions> {
   final auth = FirebaseAuth.instance;
   var storage=FirebaseStorage.instance;
   late Databases db;
+  String passuid="", passfrom="", passto="";
   List docs=[];
   initialise(){
     db=Databases();
@@ -78,9 +80,12 @@ class _DriverOptionsState extends State<DriverOptions> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: (){
-                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
                           print(docs[index]);
                           db.create_request(docs[index]['from'],docs[index]['to'], docs[index]['id'],'1',_uid);
+                          passuid=docs[index]['id'];
+                          passfrom=docs[index]['from'];
+                          passto=docs[index]['to'];
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Userdetails(uid: passuid, pfrom: passfrom, to: passto)));
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(238, 107, 97, 1.0)),
