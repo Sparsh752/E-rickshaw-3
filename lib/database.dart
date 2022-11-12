@@ -67,4 +67,32 @@ class Databases{
 
 
   }
+  Future get_passenger(String uid) async{
+    late Map? a;
+    try{
+      var snapshot=await firestore.collection("passengers").doc(uid).get();
+      a=snapshot.data();
+      // print(a!['name']);
+      return a;
+
+    } catch(e){
+      print(e);
+    }
+
+
+  }
+  Future get_driver(String uid) async{
+    late Map? a;
+    try{
+      var snapshot=await firestore.collection("drivers").doc(uid).get();
+      a=snapshot.data();
+      // print(a!['name']);
+      return a;
+
+    } catch(e){
+      print(e);
+    }
+
+
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:erickshaw/screens/driverinfo.dart';
 import 'package:erickshaw/screens/select_route.dart';
 import 'package:erickshaw/screens/user_choice.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +21,7 @@ class _PassWaitState extends State<PassWait> {
   late String to;
   late Map a;
   late Databases db;
+  String passuid="", passfrom="", passto="";
   initialise() {
     db = Databases();
     db.initialise();
@@ -34,6 +36,11 @@ class _PassWaitState extends State<PassWait> {
     timer=Timer.periodic(Duration(seconds: 3), (timer) {
       CheckAccepted();
     });
+  }
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -74,6 +81,13 @@ class _PassWaitState extends State<PassWait> {
         a=value;
         if(a['pending']=='1'){
           print(a['from']);
+          passfrom=a['from'];
+          passto=a['to'];
+          passuid=a['driver_uid'];
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => driver_details(uid: passuid,pfrom: passfrom, to: passto,)));
+          db.delete(_uid);
+          dispose();
+
         }
       });
     });
