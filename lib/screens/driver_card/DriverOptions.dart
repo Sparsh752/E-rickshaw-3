@@ -27,19 +27,15 @@ class _DriverOptionsState extends State<DriverOptions> {
   initialise(){
     db=Databases();
     db.initialise();
-    db.read().then((value) => {
-      setState((){
-        docs=value;
-      })
-    });
   }
   late Timer timer;
   late String _uid;
   @override
   void initState(){
     super.initState();
+    initialise();
     timer=Timer.periodic(Duration(seconds: 1), (timer) {
-      initialise();
+      Reload();
     });
     // initialise();
     _uid=auth.currentUser?.uid.toString()??"";
@@ -119,5 +115,11 @@ class _DriverOptionsState extends State<DriverOptions> {
       ),
     );
   }
+  Future<void> Reload() async {
+    db.read().then((value) => {
+      setState((){
+        docs=value;
+      })
+    });}
 }
 

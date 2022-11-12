@@ -35,7 +35,9 @@ class _SelectRouteState extends State<SelectRoute> {
       backgroundColor: Color.fromRGBO(239, 242, 221, 1),
       appBar: AppBar(
         leadingWidth: 0,
+        leading: Text(''),
         title: Text('Select Route'),
+        backgroundColor: Color.fromRGBO(238, 107, 97, 1.0),
         actions: [
           IconButton(
               onPressed: (){
