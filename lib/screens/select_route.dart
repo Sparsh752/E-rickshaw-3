@@ -1,4 +1,5 @@
 import 'package:erickshaw/screens/landingpage.dart';
+import 'package:erickshaw/screens/pass_waiting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -165,7 +166,7 @@ class _SelectRouteState extends State<SelectRoute> {
                   }
                   if(errormsg==""){
                     db.create_request(fromValue!, toValue!, _uid);
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Landing()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PassWait()));
                   }else{
                     Fluttertoast.showToast(msg: errormsg!, toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,timeInSecForIosWeb: 1);
                   }

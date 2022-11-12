@@ -1,3 +1,4 @@
+import 'package:erickshaw/screens/driver_card/DriverOptions.dart';
 import 'package:erickshaw/screens/driversign.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,7 @@ class _Login_DriverState extends State<Login_Driver> {
                     }
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${errormsg}')));
                   }
-                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DriverOptions()));
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(238, 107, 97, 1.0)),
