@@ -19,12 +19,14 @@ class _SelectRouteState extends State<SelectRoute> {
     db = Databases();
     db.initialise();
   }
+  late Map a;
   final auth = FirebaseAuth.instance;
   late String _uid;
   void initState(){
     super.initState();
     initialise();
     _uid=auth.currentUser?.uid.toString()??"";
+    checking();
   }
   String? fromValue ;
   String? toValue ;
@@ -212,5 +214,13 @@ class _SelectRouteState extends State<SelectRoute> {
         ),
       ),
     );
+  }
+  Future<void> checking() async {
+    db.check_request(_uid).then((value){
+      a=value;
+      print(a);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PassWait()));
+    });
+
   }
 }
